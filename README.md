@@ -12,13 +12,26 @@
 [![Reproducible](https://img.shields.io/badge/Reproducible-Empirical-blue.svg)](RESULTS.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](pyproject.toml)
-[![Tests Passed](https://img.shields.io/badge/Tests-41%20Passed-brightgreen.svg)](tests/test_core.py)
+[![tests](https://github.com/gomoodh-droid/arabic-retrieval/actions/workflows/tests.yml/badge.svg)](https://github.com/gomoodh-droid/arabic-retrieval/actions)
 
 </div>
 
 ---
 
 > **This project does not seek to confirm a hypothesis — it seeks to refute one when the data does not support it.** It has publicly corrected itself three times so far.
+
+---
+
+## فلسفة التصميم (Design Philosophy)
+
+1. **القياس قبل التخمين (Measure, Don't Guess):**
+   لا توجد خيارات افتراضية تناسب كل المتون. كل قرار لغوي أو تقطيعي يُقاس بمسطرة حتمية وبدلالة إحصائية قبل اعتماده.
+
+2. **الخلو التام من الاعتماديات (Zero Dependencies):**
+   النواة مبنية باستعمال مكتبة بايثون القياسية فقط. لا PyTorch، لا Transformers، ولا حزم خارجية ثقيلة، لضمان السرعة المطلقة والتشغيل الفوري في أي بيئة.
+
+3. **الضبط الصارم ضد التسريب (Leakage Control):**
+   تجنب النتائج المتفائلة التضليلية عبر عزل كلمات الاستعلام من المتن المنشور لحساب الدقة الحقيقية.
 
 ---
 
@@ -36,6 +49,7 @@ Instead, it is:
 - ✓ A reproducible laboratory for evaluating retrieval strategies
 
 ---
+
 
 <details open>
 <summary><b>English summary</b> — 30 seconds</summary>
@@ -132,6 +146,13 @@ flowchart TD
     class L,E exportStyle;
 ```
 
+<div align="center">
+
+![Arabic Retrieval Lab Architecture](docs/architecture.svg)
+
+</div>
+
+
 
 
 
@@ -208,9 +229,14 @@ $ python tune.py my_docs.json --questions my_qs.json -k 1
 
 **٤. الاسترجاع اللفظي وحده لا يكفي للعربية.** عند ٨٠٠٠ مستند وبعشرين نتيجة، **أكثر من نصف الأسئلة لا يصل جوابها**. لمن يبني RAG: نصف أسئلتك لن تبلغ النموذج مهما كان ذكيًا.
 
-**٥. لا تنشر فرقًا بلا اختبار.** الفرق بين `0.245` و`0.2225` على ٤٠٠ سؤال تسعة أسئلة — قد يكون ضجيجًا.
+<div align="center">
+
+![Arabic Retrieval Benchmark Results](docs/results_chart.svg)
+
+</div>
 
 📄 التفصيل الكامل والجداول: **[RESULTS.md](RESULTS.md)**
+
 
 ## متى تستخدمها ومتى لا
 
