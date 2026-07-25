@@ -8,16 +8,32 @@
 
 **لا توجد «أفضل إعدادات» للبحث في النص العربي — توجد أفضل إعدادات لمتنك أنت. وهذي أداة تقيسها.**
 
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](pyproject.toml)
-[![deps](https://img.shields.io/badge/dependencies-none-brightgreen.svg)](pyproject.toml)
-[![tests](https://img.shields.io/badge/tests-41%20passed-brightgreen.svg)](tests/test_core.py)
+[![Zero Dependencies](https://img.shields.io/badge/Zero--Dependencies-100%25-brightgreen.svg)](pyproject.toml)
+[![Reproducible](https://img.shields.io/badge/Reproducible-Empirical-blue.svg)](RESULTS.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](pyproject.toml)
+[![Tests Passed](https://img.shields.io/badge/Tests-41%20Passed-brightgreen.svg)](tests/test_core.py)
 
 </div>
 
 ---
 
 > **This project does not seek to confirm a hypothesis — it seeks to refute one when the data does not support it.** It has publicly corrected itself three times so far.
+
+---
+
+## What this project is NOT / ما ليس عليه هذا المشروع
+
+This project is **not**:
+- ✗ A production search engine
+- ✗ A replacement for Elasticsearch / OpenSearch
+- ✗ A semantic retrieval framework
+- ✗ A benchmark claiming one strategy is universally superior
+
+Instead, it is:
+- ✓ A measurement framework for Arabic lexical retrieval
+- ✓ A recommendation engine whose output is constrained by statistical evidence
+- ✓ A reproducible laboratory for evaluating retrieval strategies
 
 ---
 
@@ -41,6 +57,7 @@ every claim states the corpus it came from. `pytest` · zero dependencies · MIT
 </details>
 
 ---
+
 
 ## المشكلة
 
