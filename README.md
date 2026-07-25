@@ -53,23 +53,28 @@ every claim states the corpus it came from. `pytest` · zero dependencies · MIT
 
 ```mermaid
 flowchart TD
-    A["متنك<br/><small>نصوص + أسئلة لها إجابات معروفة</small>"]
-    A --> F["بصمة المتن<br/><small>١٣ خاصية</small>"]
-    A --> S["فضاء الاستراتيجيات<br/><small>تطبيع × تقطيع × تجذيع × مقاطع</small>"]
-    S --> M["تقييم بمسطرة حتمية<br/><small>recall@k · MRR · زمن · ذاكرة</small>"]
-    M --> T["اختبار إحصائي<br/><small>الفروق الصغيرة ضجيج حتى تُثبَت</small>"]
-    T --> P["جبهة باريتو"]
-    T --> B["قيد الميزانية<br/><small>«≤ 50ms و≤ 2GB»</small>"]
-    P --> W["التهيئة الموصى بها"]
-    B --> W
-    F -.->|"تقيّيد التوصية"| W
-    W --> L["ArabicRetriever<br/><small>استعمال محلي</small>"]
-    W --> E["Elasticsearch / OpenSearch<br/><small>+ تقرير يشرح لماذا</small>"]
+    A["📖 متنك الأصلي<br/>(نصوص + أسئلة اختبار)"]
+    A --> F["🔍 بصمة المتن<br/>(١٣ خاصية لغوية)"]
+    A --> S["⚙️ فضاء الاستراتيجيات<br/>(تطبيع × تقطيع × تجذيع × مقاطع)"]
 
-    style M fill:#E1F5EE,stroke:#0F6E56
-    style T fill:#FAEEDA,stroke:#BA7517
-    style W fill:#EEEDFE,stroke:#534AB7
+    S --> M["📏 تقييم بمسطرة حتمية<br/>(Recall@k · MRR · زمن · ذاكرة)"]
+    M --> T["⚖️ اختبار إحصائي<br/>(تمييز الفروق الحقيقية عن الضجيج)"]
+
+    T --> P["📊 جبهة باريتو<br/>(توازن الجودة مع الموارد)"]
+    T --> B["⏱️ قيد الميزانية<br/>(زمن ≤ 50ms · ذاكرة ≤ 2GB)"]
+
+    P --> W["🏆 التهيئة الموصى بها<br/>(الأفضل لبياناتك)"]
+    B --> W
+    F -.->|"تقييد التوصية"| W
+
+    W --> L["🚀 ArabicRetriever<br/>(استعمال محلي بـ ٣ أسطر)"]
+    W --> E["🌐 Elasticsearch / OpenSearch<br/>(+ تقرير المبرّرات الهندسي)"]
+
+    style M fill:#0F6E56,stroke:#10B981,color:#FFFFFF
+    style T fill:#BA7517,stroke:#F59E0B,color:#FFFFFF
+    style W fill:#534AB7,stroke:#8B5CF6,color:#FFFFFF
 ```
+
 
 ## البدء السريع
 
