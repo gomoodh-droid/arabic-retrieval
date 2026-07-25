@@ -52,28 +52,54 @@ every claim states the corpus it came from. `pytest` · zero dependencies · MIT
 ## كيف تعمل
 
 ```mermaid
-flowchart TD
-    A["📖 متنك الأصلي<br/>(نصوص + أسئلة اختبار)"]
-    A --> F["🔍 بصمة المتن<br/>(١٣ خاصية لغوية)"]
-    A --> S["⚙️ فضاء الاستراتيجيات<br/>(تطبيع × تقطيع × تجذيع × مقاطع)"]
+flowchart LR
+    subgraph INPUT [" 📂 1. الإدخال والبصمة "]
+        A[("📖 المتن الأصلي<br/>نصوص + أسئلة")]
+        F["🔍 بصمة المتن<br/>١٣ خاصية لغوية"]
+    end
 
-    S --> M["📏 تقييم بمسطرة حتمية<br/>(Recall@k · MRR · زمن · ذاكرة)"]
-    M --> T["⚖️ اختبار إحصائي<br/>(تمييز الفروق الحقيقية عن الضجيج)"]
+    subgraph ENGINE [" ⚙️ 2. محرك التقييم والقياس "]
+        S["⚙️ فضاء الاستراتيجيات<br/>تطبيع × تقطيع × تجذيع × مقاطع"]
+        M["📏 مسطرة حتمية<br/>Recall@k · MRR · زمن · ذاكرة"]
+        T["⚖️ اختبار إحصائي<br/>Bootstrap Significance"]
+    end
 
-    T --> P["📊 جبهة باريتو<br/>(توازن الجودة مع الموارد)"]
-    T --> B["⏱️ قيد الميزانية<br/>(زمن ≤ 50ms · ذاكرة ≤ 2GB)"]
+    subgraph DECISION [" 🎯 3. فلترة القرار "]
+        P["📊 جبهة باريتو<br/>توازن الجودة والموارد"]
+        B["⏱️ قيد الميزانية<br/>زمن ≤ 50ms | ذاكرة ≤ 2GB"]
+        W["🏆 التهيئة الموصى بها<br/>الأفضل لبياناتك"]
+    end
 
-    P --> W["🏆 التهيئة الموصى بها<br/>(الأفضل لبياناتك)"]
+    subgraph EXPORT [" 🚀 4. النشر والتضمين "]
+        L["⚡ ArabicRetriever<br/>استعمال محلي بـ ٣ أسطر"]
+        E["🌐 Elasticsearch / OpenSearch<br/>+ تقرير المبرّرات الهندسي"]
+    end
+
+    A --> F
+    A --> S
+    S --> M
+    M --> T
+    T --> P
+    T --> B
+    P --> W
     B --> W
     F -.->|"تقييد التوصية"| W
+    W --> L
+    W --> E
 
-    W --> L["🚀 ArabicRetriever<br/>(استعمال محلي بـ ٣ أسطر)"]
-    W --> E["🌐 Elasticsearch / OpenSearch<br/>(+ تقرير المبرّرات الهندسي)"]
+    classDef primary fill:#1E293B,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC;
+    classDef metric fill:#0F766E,stroke:#2DD4BF,stroke-width:2px,color:#F0FDF4;
+    classDef stat fill:#78350F,stroke:#F59E0B,stroke-width:2px,color:#FEF3C7;
+    classDef winner fill:#4C1D95,stroke:#A78BFA,stroke-width:2px,color:#F5F3FF;
+    classDef target fill:#0369A1,stroke:#38BDF8,stroke-width:2px,color:#F0F9FF;
 
-    style M fill:#0F6E56,stroke:#10B981,color:#FFFFFF
-    style T fill:#BA7517,stroke:#F59E0B,color:#FFFFFF
-    style W fill:#534AB7,stroke:#8B5CF6,color:#FFFFFF
+    class A,S primary;
+    class F,M metric;
+    class T,P,B stat;
+    class W winner;
+    class L,E target;
 ```
+
 
 
 ## البدء السريع

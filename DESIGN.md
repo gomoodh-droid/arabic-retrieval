@@ -14,34 +14,64 @@
 ## التدفّق
 
 ```mermaid
-flowchart TD
-    A["📖 المتن الخام<br/>(نصوص + أسئلة موسومة)"]
+flowchart LR
+    subgraph INPUT [" 📂 1. الإدخال والبصمة "]
+        A[("📖 المتن الخام<br/>نصوص + أسئلة موسومة")]
+        F["🔍 استخراج الخصائص<br/>features.py · ١٣ خاصية"]
+    end
 
-    A --> F["🔍 استخراج الخصائص<br/>(features.py · ١٣ خاصية)"]
-    A --> S["⚙️ فضاء الاستراتيجيات<br/>(تطبيع × تقطيع × تجذيع × مقاطع)"]
+    subgraph ENGINE [" ⚙️ 2. طبقات المعالجة والقياس "]
+        S["⚙️ فضاء الاستراتيجيات<br/>تطبيع × تقطيع × تجذيع × مقاطع"]
+        T["🧩 طبقة النص<br/>تطبيع + تقطيع مخزَّنة"]
+        R["🔢 طبقة التمثيل<br/>رموز · مقاطع · BM25"]
+        M["📏 المسطرة الحتمية<br/>recall@k · MRR · زمن · ذاكرة"]
+        B["🔎 البحث في الفضاء<br/>جشع · شعاعي · بالنموذج"]
+        ST["⚖️ الدلالة الإحصائية<br/>stats.py — بوابة إلزامية"]
+    end
 
-    S --> T["🧩 طبقة النص<br/>(تطبيع + تقطيع — مخزَّنة ببصمة)"]
-    T --> R["🔢 طبقة التمثيل<br/>(رموز · مقاطع · BM25)"]
-    R --> M["📏 المسطرة الحتمية<br/>(recall@k · MRR · زمن · ذاكرة)"]
-    M --> B["🔎 البحث في الفضاء<br/>(جشع · شعاعي · بالنموذج)"]
-    B --> ST["⚖️ الدلالة الإحصائية<br/>(stats.py — بوابة إلزامية)"]
+    subgraph DECISION [" 🎯 3. فلترة القرار "]
+        D{"🎯 القرار"}
+        P["📊 جبهة باريتو"]
+        BG["⏱️ قيد الميزانية"]
+        W["🏆 التهيئة الموصى بها"]
+    end
 
-    ST --> D{"🎯 القرار"}
+    subgraph EXPORT [" 🚀 4. النشر والتصدير "]
+        L["⚡ استعمال محلي<br/>ArabicRetriever"]
+        E["🌐 هدف نشر خارجي<br/>Elasticsearch / OpenSearch"]
+        C["📦 ملف مساهمة موحّد<br/>بذرة بيانات متعددة المتون"]
+    end
+
+    A --> F
+    A --> S
+    S --> T
+    T --> R
+    R --> M
+    M --> B
+    B --> ST
+    ST --> D
     F -.->|"تقييد نطاق التوصية"| D
-    D --> P["📊 جبهة باريتو"]
-    D --> BG["⏱️ قيد الميزانية"]
-
-    P --> W["🏆 التهيئة الموصى بها"]
+    D --> P
+    D --> BG
+    P --> W
     BG --> W
+    W --> L
+    W --> E
+    W --> C
 
-    W --> L["🚀 استعمال محلي<br/>(ArabicRetriever)"]
-    W --> E["🌐 هدف نشر خارجي<br/>(Elasticsearch / OpenSearch)"]
-    W --> C["📦 ملف مساهمة موحّد<br/>(بذرة بيانات متعددة المتون)"]
+    classDef primary fill:#1E293B,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC;
+    classDef metric fill:#0F766E,stroke:#2DD4BF,stroke-width:2px,color:#F0FDF4;
+    classDef stat fill:#78350F,stroke:#F59E0B,stroke-width:2px,color:#FEF3C7;
+    classDef winner fill:#4C1D95,stroke:#A78BFA,stroke-width:2px,color:#F5F3FF;
+    classDef target fill:#0369A1,stroke:#38BDF8,stroke-width:2px,color:#F0F9FF;
 
-    style M fill:#0F6E56,stroke:#10B981,color:#FFFFFF
-    style ST fill:#BA7517,stroke:#F59E0B,color:#FFFFFF
-    style W fill:#534AB7,stroke:#8B5CF6,color:#FFFFFF
+    class A,S primary;
+    class F,T,R,M metric;
+    class B,ST,D,P,BG stat;
+    class W winner;
+    class L,E,C target;
 ```
+
 
 
 **لاحظ أن خصائص المتن تدخل عند طرفَي المسار:** في البداية لتوصيف ما نقيسه، وفي النهاية
