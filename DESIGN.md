@@ -14,63 +14,74 @@
 ## التدفّق
 
 ```mermaid
-flowchart LR
-    subgraph INPUT [" 📂 1. الإدخال والبصمة "]
-        A[("📖 المتن الخام<br/>نصوص + أسئلة موسومة")]
-        F["🔍 استخراج الخصائص<br/>features.py · ١٣ خاصية"]
+flowchart TD
+    %% --- STEP 1: INPUT ---
+    subgraph INPUT [" 📂 1. الإدخال والبصمة اللغوية (Data & Profiling) "]
+        direction TB
+        A[("📖 <b>المتن الخام</b><br/>نصوص + أسئلة موسومة")]
+        F["🔍 <b>استخراج الخصائص (features.py)</b><br/>١٣ خاصية لغوية وهيكلية"]
     end
 
-    subgraph ENGINE [" ⚙️ 2. طبقات المعالجة والقياس "]
-        S["⚙️ فضاء الاستراتيجيات<br/>تطبيع × تقطيع × تجذيع × مقاطع"]
-        T["🧩 طبقة النص<br/>تطبيع + تقطيع مخزَّنة"]
-        R["🔢 طبقة التمثيل<br/>رموز · مقاطع · BM25"]
-        M["📏 المسطرة الحتمية<br/>recall@k · MRR · زمن · ذاكرة"]
-        B["🔎 البحث في الفضاء<br/>جشع · شعاعي · بالنموذج"]
-        ST["⚖️ الدلالة الإحصائية<br/>stats.py — بوابة إلزامية"]
+    %% --- STEP 2: ENGINE ---
+    subgraph ENGINE [" ⚙️ 2. طبقات المعالجة والقياس السريري (Evaluation Engine) "]
+        direction TB
+        S["⚙️ <b>فضاء الاستراتيجيات</b><br/>تطبيع ⊗ تقطيع ⊗ تجذيع ⊗ مقاطع"]
+        T["🧩 <b>طبقة النص (Text Layer)</b><br/>تطبيع + تقطيع مخزَّنة ببصمة"]
+        R["🔢 <b>طبقة التمثيل (BM25 Layer)</b><br/>رموز · مقاطع · فهارس معكوسة"]
+        M["📏 <b>المسطرة الحتمية (Deterministic Metrics)</b><br/>recall@k · MRR · زمن · ذاكرة"]
+        B["🔎 <b>البحث في الفضاء (Search Strategies)</b><br/>جشع · شعاعي · بالنموذج"]
+        ST["⚖️ <b>الدلالة الإحصائية (stats.py)</b><br/>Bootstrap Significance Testing"]
     end
 
-    subgraph DECISION [" 🎯 3. فلترة القرار "]
-        D{"🎯 القرار"}
-        P["📊 جبهة باريتو"]
-        BG["⏱️ قيد الميزانية"]
-        W["🏆 التهيئة الموصى بها"]
+    %% --- STEP 3: DECISION ---
+    subgraph DECISION [" 🎯 3. فلترة القرار والحل الأمثل (Decision & Filtering) "]
+        direction TB
+        D{"🎯 <b>تقييم القرار النهائي</b>"}
+        P["📊 <b>جبهة باريتو (Pareto Frontier)</b><br/>توازن الجودة والموارد"]
+        BG["⏱️ <b>قيود الميزانية التشغيلية</b><br/>زمن الاستجابة ≤ 50ms | الذاكرة ≤ 2GB"]
+        W["🏆 <b>التهيئة الموصى بها (Optimal Config)</b><br/>الخيار الأفضل والأنسب للبيانات"]
     end
 
-    subgraph EXPORT [" 🚀 4. النشر والتصدير "]
-        L["⚡ استعمال محلي<br/>ArabicRetriever"]
-        E["🌐 هدف نشر خارجي<br/>Elasticsearch / OpenSearch"]
-        C["📦 ملف مساهمة موحّد<br/>بذرة بيانات متعددة المتون"]
+    %% --- STEP 4: EXPORT ---
+    subgraph EXPORT [" 🚀 4. النشر والتكامل (Deployment & Export) "]
+        direction TB
+        L["⚡ <b>استعمال محلي</b><br/>ArabicRetriever بـ ٣ أسطر"]
+        E["🌐 <b>هدف نشر خارجي</b><br/>Elasticsearch / OpenSearch + تقرير المبرّرات"]
+        C["📦 <b>ملف مساهمة موحّد</b><br/>بذرة بيانات متعددة المتون"]
     end
 
+    %% --- RELATIONS ---
+    A ==> S
     A --> F
-    A --> S
-    S --> T
-    T --> R
-    R --> M
-    M --> B
-    B --> ST
-    ST --> D
-    F -.->|"تقييد نطاق التوصية"| D
-    D --> P
-    D --> BG
-    P --> W
-    BG --> W
-    W --> L
-    W --> E
-    W --> C
+    S ==> T
+    T ==> R
+    R ==> M
+    M ==> B
+    B ==> ST
+    ST ==> D
+    F -.->|"💡 تقييد التوصية بناءً على البصمة"| D
+    D ==> P
+    D ==> BG
+    P ==> W
+    BG ==> W
+    W ==> L
+    W ==> E
+    W ==> C
 
-    classDef primary fill:#1E293B,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC;
-    classDef metric fill:#0F766E,stroke:#2DD4BF,stroke-width:2px,color:#F0FDF4;
-    classDef stat fill:#78350F,stroke:#F59E0B,stroke-width:2px,color:#FEF3C7;
-    classDef winner fill:#4C1D95,stroke:#A78BFA,stroke-width:2px,color:#F5F3FF;
-    classDef target fill:#0369A1,stroke:#38BDF8,stroke-width:2px,color:#F0F9FF;
+    %% --- STYLING (Modern Tech Palette) ---
+    classDef inputStyle fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC;
+    classDef engineStyle fill:#064E3B,stroke:#34D399,stroke-width:2px,color:#ECFDF5;
+    classDef decisionStyle fill:#312E81,stroke:#818CF8,stroke-width:2px,color:#EEF2FF;
+    classDef winnerStyle fill:#581C87,stroke:#F43F5E,stroke-width:3px,color:#FFF1F2;
+    classDef exportStyle fill:#1E293B,stroke:#F59E0B,stroke-width:2px,color:#FEF3C7;
 
-    class A,S primary;
-    class F,T,R,M metric;
-    class B,ST,D,P,BG stat;
-    class W winner;
-    class L,E,C target;
+    class A,F inputStyle;
+    class S,T,R,M,B,ST engineStyle;
+    class D,P,BG decisionStyle;
+    class W winnerStyle;
+    class L,E,C exportStyle;
 ```
+
 
 
 

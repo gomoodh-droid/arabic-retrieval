@@ -52,53 +52,68 @@ every claim states the corpus it came from. `pytest` · zero dependencies · MIT
 ## كيف تعمل
 
 ```mermaid
-flowchart LR
-    subgraph INPUT [" 📂 1. الإدخال والبصمة "]
-        A[("📖 المتن الأصلي<br/>نصوص + أسئلة")]
-        F["🔍 بصمة المتن<br/>١٣ خاصية لغوية"]
+flowchart TD
+    %% --- STEP 1: INPUT ---
+    subgraph INPUT [" 📂 1. الإدخال والبصمة اللغوية (Data & Profiling) "]
+        direction TB
+        A[("📖 <b>المتن الأصلي</b><br/>نصوص + أسئلة")]
+        F["🔍 <b>بصمة المتن (Text Fingerprint)</b><br/>١٣ خاصية لغوية وهيكلية"]
     end
 
-    subgraph ENGINE [" ⚙️ 2. محرك التقييم والقياس "]
-        S["⚙️ فضاء الاستراتيجيات<br/>تطبيع × تقطيع × تجذيع × مقاطع"]
-        M["📏 مسطرة حتمية<br/>Recall@k · MRR · زمن · ذاكرة"]
-        T["⚖️ اختبار إحصائي<br/>Bootstrap Significance"]
+    %% --- STEP 2: ENGINE ---
+    subgraph ENGINE [" ⚙️ 2. محرك التقييم والقياس السريري (Evaluation Engine) "]
+        direction TB
+        S["⚙️ <b>فضاء الاستراتيجيات</b><br/>تطبيع ⊗ تقطيع ⊗ تجذيع ⊗ مقاطع"]
+        M["📏 <b>المسطرة الحتمية (Deterministic Metrics)</b><br/>Recall@k · MRR · زمن التقييم · استهلاك الذاكرة"]
+        T["⚖️ <b>الاختبار الإحصائي</b><br/>Bootstrap Significance Testing"]
     end
 
-    subgraph DECISION [" 🎯 3. فلترة القرار "]
-        P["📊 جبهة باريتو<br/>توازن الجودة والموارد"]
-        B["⏱️ قيد الميزانية<br/>زمن ≤ 50ms | ذاكرة ≤ 2GB"]
-        W["🏆 التهيئة الموصى بها<br/>الأفضل لبياناتك"]
+    %% --- STEP 3: DECISION ---
+    subgraph DECISION [" 🎯 3. فلترة القرار والحل الأمثل (Decision & Filtering) "]
+        direction TB
+        P["📊 <b>جبهة باريتو (Pareto Frontier)</b><br/>توازن الجودة والموارد"]
+        B["⏱️ <b>قيود الميزانية التشغيلية</b><br/>زمن الاستجابة ≤ 50ms | الذاكرة ≤ 2GB"]
+        W["🏆 <b>التهيئة الموصى بها (Optimal Config)</b><br/>الخيار الأفضل والأنسب للبيانات"]
     end
 
-    subgraph EXPORT [" 🚀 4. النشر والتضمين "]
-        L["⚡ ArabicRetriever<br/>استعمال محلي بـ ٣ أسطر"]
-        E["🌐 Elasticsearch / OpenSearch<br/>+ تقرير المبرّرات الهندسي"]
+    %% --- STEP 4: EXPORT ---
+    subgraph EXPORT [" 🚀 4. النشر والتكامل (Deployment & Export) "]
+        direction TB
+        L["⚡ <b>ArabicRetriever</b><br/>استدعاء محلي بـ ٣ أسطر برمجية"]
+        E["🌐 <b>Elasticsearch / OpenSearch</b><br/>+ تقرير المبرّرات الهندسي الشامل"]
     end
 
-    A --> F
-    A --> S
-    S --> M
-    M --> T
-    T --> P
-    T --> B
-    P --> W
-    B --> W
-    F -.->|"تقييد التوصية"| W
-    W --> L
-    W --> E
+    %% --- RELATIONS ---
+    A ==>|"1. تغذية البيانات"| S
+    A -->|"2. استخراج الخصائص"| F
+    
+    S ==> M
+    M ==> T
+    
+    T ==>|"المقارنة"| P
+    T ==>|"التحقق"| B
+    
+    P ==> W
+    B ==> W
+    F -.->|"💡 تقييد التوصية بناءً على البصمة"| W
+    
+    W ==>|"نشر محلي"| L
+    W ==>|"تكامل سحابي"| E
 
-    classDef primary fill:#1E293B,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC;
-    classDef metric fill:#0F766E,stroke:#2DD4BF,stroke-width:2px,color:#F0FDF4;
-    classDef stat fill:#78350F,stroke:#F59E0B,stroke-width:2px,color:#FEF3C7;
-    classDef winner fill:#4C1D95,stroke:#A78BFA,stroke-width:2px,color:#F5F3FF;
-    classDef target fill:#0369A1,stroke:#38BDF8,stroke-width:2px,color:#F0F9FF;
+    %% --- STYLING (Modern Tech Palette) ---
+    classDef inputStyle fill:#0F172A,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC;
+    classDef engineStyle fill:#064E3B,stroke:#34D399,stroke-width:2px,color:#ECFDF5;
+    classDef decisionStyle fill:#312E81,stroke:#818CF8,stroke-width:2px,color:#EEF2FF;
+    classDef winnerStyle fill:#581C87,stroke:#F43F5E,stroke-width:3px,color:#FFF1F2;
+    classDef exportStyle fill:#1E293B,stroke:#F59E0B,stroke-width:2px,color:#FEF3C7;
 
-    class A,S primary;
-    class F,M metric;
-    class T,P,B stat;
-    class W winner;
-    class L,E target;
+    class A,F inputStyle;
+    class S,M,T engineStyle;
+    class P,B decisionStyle;
+    class W winnerStyle;
+    class L,E exportStyle;
 ```
+
 
 
 
