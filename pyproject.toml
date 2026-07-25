@@ -1,6 +1,7 @@
 [project]
-name = "arabic-retrieval-lab"
+name = "arabic-retrieval"
 version = "0.1.0"
+
 description = "باحث عربي مقيس + مختبر يكتشف أفضل إعدادات الاسترجاع لنصك — إعداد وتطوير: المهندس عبدالرحمن رفاعي المطيري"
 authors = [{name = "Eng. Abdulrahman Refai Al-Mutairi", email = "abdulrahman@example.com"}]
 readme = "README.md"
