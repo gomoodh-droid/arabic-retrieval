@@ -1,22 +1,22 @@
+<div align="center">
+
 # Arabic Retrieval Lab
 ### مختبر الاسترجاع العربي · «علم نافع»
 
 **إعداد وتطوير: المهندس عبدالرحمن رفاعي المطيري (Eng. Abdulrahman Refai Al-Mutairi)**
 
-
 **لا توجد «أفضل إعدادات» للبحث في النص العربي — توجد أفضل إعدادات لمتنك أنت. وهذي أداة تقيسها.**
 
-
-[![tests](https://github.com/USER/arabic-retrieval-lab/actions/workflows/tests.yml/badge.svg)](../../actions)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](pyproject.toml)
 [![deps](https://img.shields.io/badge/dependencies-none-brightgreen.svg)](pyproject.toml)
-[![coverage](https://img.shields.io/badge/coverage-89%25-brightgreen.svg)](tests/test_core.py)
+[![tests](https://img.shields.io/badge/tests-41%20passed-brightgreen.svg)](tests/test_core.py)
 
 </div>
 
-> **This project does not seek to confirm a hypothesis — it seeks to refute one when the data
-> does not support it.** It has publicly corrected itself three times so far.
+---
+
+> **This project does not seek to confirm a hypothesis — it seeks to refute one when the data does not support it.** It has publicly corrected itself three times so far.
 
 ---
 
@@ -43,11 +43,9 @@ every claim states the corpus it came from. `pytest` · zero dependencies · MIT
 
 ## المشكلة
 
-عندك نصوص عربية وتريد البحث فيها. قبل أي بحث لازم تقرر: أوحّد الهمزات؟ أحذف التشكيل؟ أجذّع
-الكلمات؟ أقطّع كل ٢٠٠ حرف أم عند نهايات الجُمل؟ أضيف مقاطع حرفية؟
+عندك نصوص عربية وتريد البحث فيها. قبل أي بحث لازم تقرر: أوحّد الهمزات؟ أحذف التشكيل؟ أجذّع الكلمات؟ أقطّع كل ٢٠٠ حرف أم عند نهايات الجُمل؟ أضيف مقاطع حرفية؟
 
-**كل مطوّر عربي يختار هذي القرارات بالحدس، والفرق بينها ضخم:** على متننا، أسوأ تهيئة تعطي
-`0.030` وأفضلها `0.177` — **ستة أضعاف**، بنفس البيانات ونفس المحرك.
+**كل مطوّر عربي يختار هذي القرارات بالحدس، والفرق بينها ضخم:** على متننا، أسوأ تهيئة تعطي `0.030` وأفضلها `0.177` — **ستة أضعاف**، بنفس البيانات ونفس المحرك.
 
 هذي الأداة تقيسها لك، وتخبرك **كم يضيف كل قرار على حدة**، وبأي كلفة زمن وذاكرة.
 
@@ -64,7 +62,7 @@ flowchart TD
     T --> B["قيد الميزانية<br/><small>«≤ 50ms و≤ 2GB»</small>"]
     P --> W["التهيئة الموصى بها"]
     B --> W
-    F -.->|"تقيّد التوصية"| W
+    F -.->|"تقيّيد التوصية"| W
     W --> L["ArabicRetriever<br/><small>استعمال محلي</small>"]
     W --> E["Elasticsearch / OpenSearch<br/><small>+ تقرير يشرح لماذا</small>"]
 
@@ -76,7 +74,7 @@ flowchart TD
 ## البدء السريع
 
 ```bash
-git clone https://github.com/USER/arabic-retrieval-lab && cd arabic-retrieval-lab
+git clone https://github.com/gomoodh-droid/arabic-retrieval.git && cd arabic-retrieval
 pip install -e .                                   # بلا اعتماديات
 pytest -q                                          # ٤١ اختبارًا · تغطية ٨٩٪
 python run.py                                      # المختبر يعمل أمامك
@@ -119,7 +117,7 @@ $ python tune.py my_docs.json --questions my_qs.json -k 1
 
 ليست مأخوذة من ورقة ولا من عُرف. **قِيست هنا**، وهذي الطريقة كاملة:
 
-| | |
+| المفهوم | التفاصيل |
 |---|---|
 | **المتن** | ٢٧٬٧١٨ مقالًا صحفيًا عربيًا (٥٢٫٦ مليون حرف) — [SaudiNewsNet](https://github.com/ParallelMazen/SaudiNewsNet) |
 | **الأسئلة** | العنوان كسؤال (العنوان استعلام، والمقال جوابه) |
@@ -132,8 +130,7 @@ $ python tune.py my_docs.json --questions my_qs.json -k 1
 
 ## أهم النتائج
 
-**١. اجمع بين التجذيع الخفيف والمقاطع الحرفية — لا تختر أحدهما.** التجذيع وحده `0.305`،
-والمقاطع وحدها `0.245`، **واجتماعهما `0.357`** (فروق مثبتة إحصائيًا).
+**١. اجمع بين التجذيع الخفيف والمقاطع الحرفية — لا تختر أحدهما.** التجذيع وحده `0.305`، والمقاطع وحدها `0.245`، **واجتماعهما `0.357`** (فروق مثبتة إحصائيًا).
 
 **٢. التوصية دالةٌ في حجم المتن.** أفضلية التجذيع على المقاطع تنمو مع الحجم:
 
@@ -143,11 +140,9 @@ $ python tune.py my_docs.json --questions my_qs.json -k 1
 
 `≈ 0.391·ln(n) − 1.501` بـ R²=0.916. **ونسمّيه اتجاهًا مقيسًا لا قانونًا** — ست نقاط من متن واحد.
 
-**٣. فوق عشرة آلاف مستند، أسقط المقاطع الحرفية وقِس.** فائدتها تتلاشى (`+0.052` عند ١٥٠٠،
-و`+0.000` عند ١٦٠٠٠) ومقابلها ضعف الذاكرة.
+**٣. فوق عشرة آلاف مستند، أسقط المقاطع الحرفية وقِس.** فائدتها تتلاشى (`+0.052` عند ١٥٠٠، و`+0.000` عند ١٦٠٠٠) ومقابلها ضعف الذاكرة.
 
-**٤. الاسترجاع اللفظي وحده لا يكفي للعربية.** عند ٨٠٠٠ مستند وبعشرين نتيجة، **أكثر من نصف
-الأسئلة لا يصل جوابها**. لمن يبني RAG: نصف أسئلتك لن تبلغ النموذج مهما كان ذكيًا.
+**٤. الاسترجاع اللفظي وحده لا يكفي للعربية.** عند ٨٠٠٠ مستند وبعشرين نتيجة، **أكثر من نصف الأسئلة لا يصل جوابها**. لمن يبني RAG: نصف أسئلتك لن تبلغ النموذج مهما كان ذكيًا.
 
 **٥. لا تنشر فرقًا بلا اختبار.** الفرق بين `0.245` و`0.2225` على ٤٠٠ سؤال تسعة أسئلة — قد يكون ضجيجًا.
 
@@ -155,7 +150,7 @@ $ python tune.py my_docs.json --questions my_qs.json -k 1
 
 ## متى تستخدمها ومتى لا
 
-| | |
+| خيار الاستخدام | التوجيه المعماري |
 |---|---|
 | **استخدمها** | تريد معرفة الإعدادات المناسبة **لمتنك**؛ متن صغير أو متوسط (حتى ~٥٠ ألف مستند)؛ لا تريد خادمًا ولا اعتماديات؛ تريد أرقامًا قابلة لإعادة الإنتاج |
 | **لا تستخدمها** | ملايين المستندات (استخدم Elasticsearch — **وصدّر إليه قرار هذي الأداة**)؛ تحتاج استرجاعًا دلاليًا اليوم؛ تحتاج توزيعًا وتوافرًا عاليًا |
@@ -178,7 +173,7 @@ python -m arl.deploy best_config.json --target elasticsearch
 
 ## الوثائق
 
-| | |
+| الملف | الوصف |
 |---|---|
 | [DESIGN.md](DESIGN.md) | المعمار، وحدود الطبقات، والقرارات التي **رُفضت** ولماذا |
 | [RESULTS.md](RESULTS.md) | كل الجداول والتصحيحات المنشورة |
@@ -189,7 +184,7 @@ python -m arl.deploy best_config.json --target elasticsearch
 
 ## البنية
 
-```
+```text
 arl/retriever.py  الواجهة العملية: ArabicRetriever
 arl/core.py       الطبقات الثلاث + المسطرة الحتمية
 arl/stats.py      مجالات الثقة والاختبار المزدوج
@@ -202,14 +197,11 @@ tune.py · ablate.py · compare.py · scale.py · ingest.py · contribute.py
 
 ## المساهمة
 
-أنفع مساهمة: **قياسات على متن من نوع مختلف** — انظر [CONTRIBUTING.md](CONTRIBUTING.md)
-و[CONTRIBUTING_DATA.md](CONTRIBUTING_DATA.md). القاعدة الوحيدة: **لا يُقبل ادّعاء بلا قياس.**
+أنفع مساهمة: **قياسات على متن من نوع مختلف** — انظر [CONTRIBUTING.md](CONTRIBUTING.md) و[CONTRIBUTING_DATA.md](CONTRIBUTING_DATA.md). القاعدة الوحيدة: **لا يُقبل ادّعاء بلا قياس.**
 
 ## شكر
 
-الأفكار المعمارية مكيَّفة عن المجتمعين الصيني والكوري، منسوبةً لأصحابها في [DESIGN.md](DESIGN.md)
-و[RESULTS.md](RESULTS.md). وشكرٌ لمراجعٍ فضّل عدم ذكر اسمه — ملاحظاته أنتجت الاختبار الإحصائي،
-ومقارنة التجذيع التي **قلبت نتيجةً كنّا نشرناها**.
+الأفكار المعمارية مكيَّفة عن المجتمعين الصيني والكوري، منسوبةً لأصحابها في [DESIGN.md](DESIGN.md) و[RESULTS.md](RESULTS.md). وشكرٌ لمراجعٍ فضّل عدم ذكر اسمه — ملاحظاته أنتجت الاختبار الإحصائي، ومقارنة التجذيع التي **قلبت نتيجةً كنّا نشرناها**.
 
 ## الترخيص والاستشهاد
 
