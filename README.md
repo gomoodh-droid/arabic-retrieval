@@ -1,9 +1,10 @@
-<div align="center">
-
 # Arabic Retrieval Lab
 ### مختبر الاسترجاع العربي · «علم نافع»
 
+**إعداد وتطوير: عبدالرحمن رفاعي (Abdulrahman Refai)**
+
 **لا توجد «أفضل إعدادات» للبحث في النص العربي — توجد أفضل إعدادات لمتنك أنت. وهذي أداة تقيسها.**
+
 
 [![tests](https://github.com/USER/arabic-retrieval-lab/actions/workflows/tests.yml/badge.svg)](../../actions)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
