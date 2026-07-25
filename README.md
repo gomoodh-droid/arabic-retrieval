@@ -1,7 +1,8 @@
 <div align="center">
 
 # Arabic Retrieval Lab
-### مختبر الاسترجاع العربي · «علم نافع»
+### مختبر الاسترجاع العربي
+
 
 **إعداد وتطوير: المهندس عبدالرحمن رفاعي المطيري (Eng. Abdulrahman Refai Al-Mutairi)**
 
