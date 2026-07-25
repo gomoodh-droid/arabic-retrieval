@@ -1,9 +1,9 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
-  - family-names: "Refai"
-    given-names: "Abdulrahman"
-    name-particle: "عبدالرحمن رفاعي"
+  - family-names: "Al-Mutairi"
+    given-names: "Eng. Abdulrahman Refai"
+    name-particle: "المهندس عبدالرحمن رفاعي المطيري"
 title: "Arabic Retrieval Lab: A Dependency-Free Measurement Lab for Arabic Lexical Retrieval"
 version: 0.1.0
 date-released: 2026-07-25

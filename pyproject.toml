@@ -1,12 +1,12 @@
 [project]
 name = "arabic-retrieval-lab"
 version = "0.1.0"
-description = "باحث عربي مقيس + مختبر يكتشف أفضل إعدادات الاسترجاع لنصك — إعداد وتطوير: عبدالرحمن رفاعي"
-authors = [{name = "Abdulrahman Refai", email = "abdulrahman@example.com"}]
+description = "باحث عربي مقيس + مختبر يكتشف أفضل إعدادات الاسترجاع لنصك — إعداد وتطوير: المهندس عبدالرحمن رفاعي المطيري"
+authors = [{name = "Eng. Abdulrahman Refai Al-Mutairi", email = "abdulrahman@example.com"}]
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
-keywords = ["arabic", "retrieval", "rag", "bm25", "nlp", "عربي", "عبدالرحمن رفاعي"]
+keywords = ["arabic", "retrieval", "rag", "bm25", "nlp", "عربي", "المهندس عبدالرحمن رفاعي المطيري"]
 dependencies = []
 
 [project.optional-dependencies]
